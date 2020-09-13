@@ -22,7 +22,7 @@ module.exports = class CarController {
    * @param {import('express').Response} res
    */
   async index(req, res) {
-    res.send("index page")
+    res.render('car/view/index.html');
   }
 
   /**
@@ -30,6 +30,6 @@ module.exports = class CarController {
    * @param {import('express').Response} res
    */
   async new(req, res) {
-    res.send('form page')
+    res.render('car/view/form.html');
   }
 };
