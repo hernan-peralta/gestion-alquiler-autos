@@ -61,7 +61,6 @@ module.exports = class CarController {
    */
   async save(req, res) {
     const car = fromDataToEntity(req.body);
-    console.log("car en cotroller.save es", car)
     await this.carService.save(car);
 
     res.redirect('/cars');

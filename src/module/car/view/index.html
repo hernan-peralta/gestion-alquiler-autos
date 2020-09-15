@@ -22,7 +22,7 @@
       <th>Transmisión</th>
     </tr>
 
-    {% for car in cars %}
+    {% for car in data.cars %}
       <tr>
         <td>{{ car.marca }}</td>
         <td>{{ car.modelo }}</td>
@@ -32,6 +32,8 @@
         <td>{{ car.aireAcondicionado }}</td>
         <td>{{ car.pasajeros }}</td>
         <td>{{ car.transmision }}</td>
+        <td><a href="/cars/view/{{car.id}}">Editar</a></td>
+        <td><a href="/cars/delete/{{car.id}}" class="delete-car">Borrar</a></td>
       </tr>
     {% endfor %}
 

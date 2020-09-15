@@ -7,6 +7,7 @@ const Sqlite3Database = require('better-sqlite3');
 const app = express();
 const port = 3000;
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 
 // https://mozilla.github.io/nunjucks/getting-started.html#when-using-node
@@ -16,8 +17,8 @@ nunjucks.configure('src/module', {
 });
 
 const db = new Sqlite3Database('sample.db', { verbose: console.log })
-
 const repository = new CarRepository(db)
+
 const service = new CarService(repository)
 const controller = new CarController(service);
 controller.configureRoutes(app);
