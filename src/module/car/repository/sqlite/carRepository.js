@@ -54,7 +54,7 @@ module.exports = class CarRepository {
           color,
           aire_acondicionado,
           pasajeros,
-          transimision
+          transmision
           ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
       `);
 
