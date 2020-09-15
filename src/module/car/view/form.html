@@ -1,6 +1,7 @@
 {% extends 'view/layout/base.html' %}
 
 {% block body %}
+{% set car = data.car %}
 
 <div id="div-boton">
   <a href="/">
@@ -11,31 +12,32 @@
 <h2>Nuevo vehículo</h2>
 
 <div id="nuevo-vehiculo">
-  <form action="/cars/new" method="POST">
+  <form action="/cars/save" method="POST">
+    <input type="hidden" name="id" value="{{car.id}}" readonly />
 
     <label for="id-marca">Marca</label>
-    <input type="text" name="marca" id="id-marca" placeholder="Marca">
+    <input type="text" name="marca" id="id-marca" placeholder="Marca" value="{{car.marca}}">
 
     <label for="id-modelo">Modelo</label>
-    <input type="text" name="modelo" id="id-modelo" placeholder="Modelo">
+    <input type="text" name="modelo" id="id-modelo" placeholder="Modelo" value="{{car.modelo}}">
 
     <label for="id-año">Año</label>
-    <input type="text" name="año" id="id-año" placeholder="Año">
+    <input type="text" name="año" id="id-año" placeholder="Año" value="{{car.año}}">
 
     <label for="id-kms">Km</label>
-    <input type="text" name="kms" id="id-kms" placeholder="Km">
+    <input type="text" name="kms" id="id-kms" placeholder="Km" value="{{car.kms}}">
 
     <label for="id-color">Color</label>
-    <input type="text" name="color" id="id-color" placeholder="Color">
+    <input type="text" name="color" id="id-color" placeholder="Color" value="{{car.color}}">
 
     <label for="id-aire-acondicionado">Aire acondicionado</label>
-    <input type="text" name="aire-acondicionado" id="id-aire-acondicionado" placeholder="Aire acondicionado">
+    <input type="text" name="aire-acondicionado" id="id-aire-acondicionado" placeholder="Aire acondicionado" value="{{car.aireAcondicionado}}">
 
     <label for="id-pasajeros">Pasajeros</label>
-    <input type="text" name="pasajeros" id="id-pasajeros" placeholder="Pasajeros">
+    <input type="text" name="pasajeros" id="id-pasajeros" placeholder="Pasajeros" value="{{car.pasajeros}}">
 
     <label for="id-transmision">Transmision</label>
-    <input type="text" name="transmision" id="id-transmision" placeholder="Transmision">
+    <input type="text" name="transmision" id="id-transmision" placeholder="Transmision" value="{{car.transmision}}">
 
     <input type="submit" value="Agregar vehículo">
 
