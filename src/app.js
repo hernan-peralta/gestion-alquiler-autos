@@ -1,7 +1,8 @@
 const express = require('express');
 const nunjucks = require('nunjucks');
 const path = require('path');
-const { CarController } = require('./module/car/module');
+const { CarController, CarService, CarRepository } = require('./module/car/module');
+const Sqlite3Database = require('better-sqlite3');
 
 const app = express();
 const port = 3000;
@@ -14,9 +15,13 @@ nunjucks.configure('src/module', {
   express: app,
 });
 
-const controller = new CarController();
+const db = new Sqlite3Database('sample.db', { verbose: console.log })
+
+const repository = new CarRepository(db)
+const service = new CarService(repository)
+const controller = new CarController(service);
 controller.configureRoutes(app);
 
-app.get('/', controller.index.bind(CarController));
+app.get('/', controller.index.bind(controller));
 
 app.listen(port, () => console.log(`Server listening at http://localhost:${port}`));
