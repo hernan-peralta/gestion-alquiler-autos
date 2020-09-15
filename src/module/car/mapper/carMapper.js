@@ -1,7 +1,6 @@
 const Car = require('../entity/car');
 
 /**
- *
  * @param {Object} formData
  * @returns Car
  */
@@ -30,9 +29,8 @@ function fromDataToEntity({
 }
 
 /**
- *
  * @param {Object} formData
- * @returns Club
+ * @returns Car
  */
 function fromDbToEntity({
   id,

@@ -3,6 +3,9 @@ const CarNotFoundError = require('../error/carNotFoundError');
 const { fromDbToEntity } = require('../../mapper/carMapper');
 
 module.exports = class CarRepository {
+  /**
+   * @param {import('better-sqlite3').Database} databaseAdapter
+   */
   constructor(databaseAdapter) {
     this.databaseAdapter = databaseAdapter;
   }
@@ -126,7 +129,7 @@ module.exports = class CarRepository {
           año,
           kms,
           color,
-          aire_acondicionaodo,
+          aire_acondicionado,
           pasajeros,
           transmision
         FROM autos`)
