@@ -30,8 +30,13 @@
     <label for="id-color">Color</label>
     <input type="text" name="color" id="id-color" placeholder="Color" value="{{car.color}}">
 
-    <label for="id-aire-acondicionado">Aire acondicionado</label>
-    <input type="text" name="aire-acondicionado" id="id-aire-acondicionado" placeholder="Aire acondicionado" value="{{car.aireAcondicionado}}">
+    <label for="radio-buttons">Aire acondicionado</label>
+    <div id="radio-buttons">
+      <label for="id-aire-acondicionado-si">Si</label>
+      <input type="radio" name="aire-acondicionado" id="id-aire-acondicionado-si" value="TRUE" {% if car.aireAcondicionado === "TRUE" %}checked{% endif %}>
+      <label for="id-aire-acondicionado-no">No</label>
+      <input type="radio" name="aire-acondicionado" id="id-aire-acondicionado-no" value="FALSE" {% if car.aireAcondicionado === "FALSE" %}checked{% endif %}>
+    </div>
 
     <label for="id-pasajeros">Pasajeros</label>
     <input type="text" name="pasajeros" id="id-pasajeros" placeholder="Pasajeros" value="{{car.pasajeros}}">
