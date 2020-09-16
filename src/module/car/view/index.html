@@ -4,6 +4,18 @@
 
   <h2>Vehículos disponibles</h2>
 
+  {% for error in errors %}
+    <div class="notificacion error">
+      {{error}}
+    </div>
+  {% endfor %}
+
+  {% for message in messages %}
+    <div class="notificacion exito">
+      {{message}}
+    </div>
+  {% endfor %}
+
   <div id="div-boton">
     <a href="/cars/new">
       <button id=''>Agregar vehículo</button>

@@ -33,3 +33,15 @@ input[type=text]{
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+.notificacion{
+  border: 5px solid;
+}
+
+.error{
+  border-color: red;
+}
+
+.exito{
+  border-color: green;
+}
