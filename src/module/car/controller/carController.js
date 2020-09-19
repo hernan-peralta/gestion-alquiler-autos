@@ -53,10 +53,10 @@ module.exports = class CarController {
     if (!id) {
       throw new CarIdNotDefinedError();
     }
-    try{
+    try {
       const car = await this.carService.getById(id);
       res.render('car/view/form.html', { data: { car } });
-    } catch(e) {
+    } catch (e) {
       req.session.errors = [e.message, e.stack];
       res.redirect('/cars');
     }
@@ -67,23 +67,20 @@ module.exports = class CarController {
    * @param {import('express').Response} res
    */
   async save(req, res) {
-    try{
+    try {
       const car = fromDataToEntity(req.body);
       const savedCar = await this.carService.save(car);
 
-      if(car.id) {
-        req.session.messages = [`El vehículo con id ${savedCar.id} se actualizó exitosamente`]
-      }
-      else{
-        req.session.messages = [`Se agregó el vehículo con id ${savedCar.id} exitosamente`]
+      if (car.id) {
+        req.session.messages = [`El vehículo con id ${savedCar.id} se actualizó exitosamente`];
+      } else {
+        req.session.messages = [`Se agregó el vehículo con id ${savedCar.id} exitosamente`];
       }
       res.redirect('/');
-    }
-    catch(e){
+    } catch (e) {
       req.session.errors = [e.message, e.stack];
       res.redirect('/cars');
     }
-
   }
 
   /**
@@ -91,13 +88,12 @@ module.exports = class CarController {
    * @param {import('express').Response} res
    */
   async delete(req, res) {
-    try{
+    try {
       const { id } = req.params;
       const car = await this.carService.getById(id);
       await this.carService.delete(car);
       req.session.messages = [`Se eliminó correctamente el vehículo con id ${id}`];
-    }
-    catch(e){
+    } catch (e) {
       req.session.errors = [e.message, e.stack];
     }
     res.redirect('/cars');

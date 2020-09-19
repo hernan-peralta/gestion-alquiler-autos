@@ -76,10 +76,10 @@ module.exports = class CarRepository {
   }
 
   /**
-   * @param {import('../../entity/car')} car 
+   * @param {import('../../entity/car')} car
    * @returns {Boolean} //true si borró algo, false si no borró nada
    */
-  delete(car){
+  delete(car) {
     if (!car || !car.id) {
       throw new CarIdNotDefinedError('El ID del auto no está definido');
     }
@@ -108,7 +108,7 @@ module.exports = class CarRepository {
         FROM autos WHERE id = ?
     `).get(id);
 
-    if (car === undefined){
+    if (car === undefined) {
       throw new CarNotFoundError(`No se encontró el auto con id ${id}`);
     }
 
