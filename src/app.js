@@ -1,12 +1,13 @@
+require('dotenv').config();
 const express = require('express');
 const nunjucks = require('nunjucks');
 const path = require('path');
-const { CarController, CarService, CarRepository } = require('./module/car/module');
 const Sqlite3Database = require('better-sqlite3');
 const session = require('express-session');
+const { CarController, CarService, CarRepository } = require('./module/car/module');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
@@ -18,15 +19,15 @@ nunjucks.configure('src/module', {
 });
 
 app.use(session({
-  secret: 'string de prueba',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  cookie: {maxAge: 604800000}, //segundos en una semana
+  cookie: { maxAge: 604800000 }, // segundos en una semana
 }));
 
-const db = new Sqlite3Database('sample.db', { verbose: console.log })
-const repository = new CarRepository(db)
-const service = new CarService(repository)
+const db = new Sqlite3Database(process.env.DB_PATH, { verbose: console.log });
+const repository = new CarRepository(db);
+const service = new CarService(repository);
 const controller = new CarController(service);
 controller.configureRoutes(app);
 
