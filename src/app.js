@@ -2,9 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const nunjucks = require('nunjucks');
 const path = require('path');
-const Sqlite3Database = require('better-sqlite3');
-const session = require('express-session');
-const { CarController, CarService, CarRepository } = require('./module/car/module');
+
+const configureDI = require('./config/di');
+const { init: initCarModule } = require('./module/car/module');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -18,19 +18,15 @@ nunjucks.configure('src/module', {
   express: app,
 });
 
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 604800000 }, // segundos en una semana
-}));
+const container = configureDI();
+app.use(container.get('Session'));
+initCarModule(app, container);
 
-const db = new Sqlite3Database(process.env.DB_PATH, { verbose: console.log });
-const repository = new CarRepository(db);
-const service = new CarService(repository);
-const controller = new CarController(service);
-controller.configureRoutes(app);
+/**
+ * @type {import('./module/car/controller/carController')} controller;
+ */
+const carController = container.get('CarController');
 
-app.get('/', controller.index.bind(controller));
+app.get('/', carController.index.bind(carController));
 
 app.listen(port, () => console.log(`Server listening at http://localhost:${port}`));
