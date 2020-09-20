@@ -1,12 +1,14 @@
+const AbstractCarRepository = require('../abstractCarRepository');
 const CarIdNotDefinedError = require('../error/carIdNotDefinedError');
 const CarNotFoundError = require('../error/carNotFoundError');
 const { fromDbToEntity } = require('../../mapper/carMapper');
 
-module.exports = class CarRepository {
+module.exports = class CarRepository extends AbstractCarRepository {
   /**
    * @param {import('better-sqlite3').Database} databaseAdapter
    */
   constructor(databaseAdapter) {
+    super();
     this.databaseAdapter = databaseAdapter;
   }
 

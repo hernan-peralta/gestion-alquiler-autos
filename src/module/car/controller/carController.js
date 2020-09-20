@@ -1,12 +1,14 @@
+const AbstractController = require('../../abstractController');
 const { fromDataToEntity } = require('../mapper/carMapper');
 const CarIdNotDefinedError = require('./error/carIdNotDefinedError');
 
-module.exports = class CarController {
+module.exports = class CarController extends AbstractController {
 /**
  * @param {import('../service/carService')} carService
  */
 
   constructor(carService) {
+    super();
     this.ROUTE_BASE = '/cars';
     this.carService = carService;
   }
