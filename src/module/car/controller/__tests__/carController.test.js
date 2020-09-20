@@ -104,7 +104,7 @@ test('View sin id da un error', () => {
 
 test('View obtiene el id del auto y lo renderea', async () => {
   serviceMock.getById.mockReset();
-  serviceMock.getById.mockImplementationOnce(() => { return {} });
+  serviceMock.getById.mockImplementationOnce(() => { return {}; });
   const resRenderMock = jest.fn();
   const reqMock = { params: { id: 1 } };
 

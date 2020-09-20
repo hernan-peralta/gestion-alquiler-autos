@@ -1,1 +1,1 @@
-module.exports = class AbstractCarRepositoryError extends Error{};
+module.exports = class AbstractCarRepositoryError extends Error {};
