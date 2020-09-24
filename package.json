@@ -21,12 +21,13 @@
   },
   "homepage": "https://github.com/hernan-peralta/car-rental#readme",
   "dependencies": {
-    "better-sqlite3": "^7.1.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "nunjucks": "^3.2.2",
-    "rsdi": "^1.0.5"
+    "rsdi": "^1.0.5",
+    "sequelize": "^6.3.5",
+    "sqlite3": "^5.0.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.13",
