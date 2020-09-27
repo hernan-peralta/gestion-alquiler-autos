@@ -31,7 +31,7 @@ module.exports = class CarModel extends Model {
           type: DataTypes.STRING,
         },
         aireAcondicionado: {
-          type: DataTypes.BOOLEAN,
+          type: DataTypes.STRING,
         },
         pasajeros: {
           type: DataTypes.NUMBER,
@@ -39,19 +39,12 @@ module.exports = class CarModel extends Model {
         transmision: {
           type: DataTypes.STRING,
         },
-        createAt: {
-          type: DataTypes.DATE,
-          defaultValue: Sequelize.NOW,
-        },
-        updatedAt: {
-          type: DataTypes.DATE,
-          defaultValue: Sequelize.NOW,
-        },
       },
       {
         sequelize: sequelizeInstance,
-        modelName: CarModel,
-        timestamps: false,
+        modelName: 'Auto',
+        createdAt: 'created_at',
+        updatedAt: 'updated_at',
       },
     );
     return CarModel;

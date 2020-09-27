@@ -39,7 +39,7 @@ function fromDbToEntity({
   año,
   kms,
   color,
-  aire_acondicionado: aireAcondicionado,
+  aireAcondicionado,
   pasajeros,
   transmision,
 }) {

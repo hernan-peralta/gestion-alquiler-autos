@@ -1,14 +1,24 @@
 const {
   default: DIContainer, object, get, factory,
 } = require('rsdi');
-const Sqlite3Database = require('better-sqlite3');
+const { Sequelize } = require('sequelize');
 const session = require('express-session');
 const { CarController, CarService, CarRepository } = require('../module/car/module');
+const CarModel = require('../module/car/model/carModel');
 
 function configureMainDatabaseAdapter() {
-  return new Sqlite3Database(process.env.DB_PATH, {
-    verbose: console.log,
+  return new Sequelize({
+    dialect: 'sqlite',
+    storage: process.env.DB_PATH,
+    logging: console.log,
   });
+}
+
+/**
+ * @param {DIContainer} container
+ */
+function configureDatabaseModelInstance(container) {
+  return CarModel.setup(container.get('MainDatabaseAdapter'));
 }
 
 function configureSession() {
@@ -30,6 +40,7 @@ function addCommonDefinitions(container) {
   container.addDefinitions({
     MainDatabaseAdapter: factory(configureMainDatabaseAdapter),
     Session: factory(configureSession),
+    CarModelInstance: factory(configureDatabaseModelInstance),
   });
 }
 
@@ -40,7 +51,7 @@ function addCarModuleDefinitions(container) {
   container.addDefinitions({
     CarController: object(CarController).construct(get('CarService')),
     CarService: object(CarService).construct(get('CarRepository')),
-    CarRepository: object(CarRepository).construct(get('MainDatabaseAdapter')),
+    CarRepository: object(CarRepository).construct(get('CarModelInstance')),
   });
 }
 
