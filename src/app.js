@@ -5,6 +5,7 @@ const path = require('path');
 
 const configureDI = require('./config/di');
 const { init: initCarModule } = require('./module/car/module');
+const { init: initCustomerModule } = require('./module/customer/module');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,6 +22,7 @@ nunjucks.configure('src/module', {
 const container = configureDI();
 app.use(container.get('Session'));
 initCarModule(app, container);
+initCustomerModule(app, container);
 
 /**
  * @type {import('./module/car/controller/carController')} controller;

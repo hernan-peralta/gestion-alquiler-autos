@@ -1,0 +1,51 @@
+{% extends 'view/layout/base.html' %}
+
+{% block body %}
+{% set customer = data.customer %}
+
+<div id="div-boton">
+  <a href="/">
+  <button id='inicio'>Volver a inicio</button>
+  </a>
+</div>
+
+<h2>Nuevo cliente</h2>
+
+<div id="nuevo-cliente">
+  <form action="/customers/save" method="POST">
+    <input type="hidden" name="id" value="{{customer.id}}" readonly />
+
+    <label for="id-nombres">Nombres</label>
+    <input type="text" name="nombres" id="id-nombres" placeholder="Nombres" value="{{customer.nombres}}">
+
+    <label for="id-apellido">Apellido</label>
+    <input type="text" name="apellido" id="id-apellido" placeholder="Apellido" value="{{customer.apellido}}">
+
+    <label for="id-tipo-documento">Tipo de documento</label>
+    <input type="text" name="tipo-documento" id="id-tipo-documento" placeholder="Tipo de documento" value="{{customer.tipoDocumento}}">
+
+    <label for="id-numero-documento">Número de documento</label>
+    <input type="text" name="numero-documento" id="id-numero-documento" placeholder="Número de documento" value="{{customer.numeroDocumento}}">
+
+    <label for="id-nacionalidad">Nacionalidad</label>
+    <input type="text" name="nacionalidad" id="id-nacionalidad" placeholder="Nacionalidad" value="{{customer.nacionalidad}}">
+
+    <label for="id-direccion">Dirección</label>
+    <input type="text" name="direccion" id="id-direccion" placeholder="Dirección" value="{{customer.direccion}}">
+
+    <label for="id-telefono">Teléfono</label>
+    <input type="text" name="telefono" id="id-telefono" placeholder="Teléfono" value="{{customer.telefono}}">
+
+    <label for="id-email">Email</label>
+    <input type="text" name="email" id="id-email" placeholder="Email" value="{{customer.email}}">
+
+    <label for="id-fecha-nacimiento">Fecha de nacimiento</label>
+    <input type="date" name="fecha-nacimiento" id="id-fecha-nacimiento" placeholder="Fecha de nacimiento" value="{{customer.fechaNacimiento}}">
+
+    <input type="submit" value="Agregar cliente">
+
+  </form>
+
+</div>
+
+{% endblock %}

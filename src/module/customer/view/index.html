@@ -1,0 +1,56 @@
+{% extends 'view/layout/base.html' %}
+
+{% block body %}
+
+  <h2>Clientes</h2>
+
+  {% for error in errors %}
+    <div class="notificacion error">
+      {{error}}
+    </div>
+  {% endfor %}
+
+  {% for message in messages %}
+    <div class="notificacion exito">
+      {{message}}
+    </div>
+  {% endfor %}
+
+  <div id="div-boton">
+    <a href="/customers/new">
+      <button id=''>Agregar cliente</button>
+    </a>
+  </div>
+
+  <table>
+    <tr>
+      <th>Nombres</th>
+      <th>Apellido</th>
+      <th>Tipo de documento</th>
+      <th>Número de documento</th>
+      <th>Nacionalidad</th>
+      <th>Dirección</th>
+      <th>Teléfono</th>
+      <th>Email</th>
+      <th>Fecha de nacimiento</th>
+    </tr>
+
+    {% for customer in data.customers %}
+      <tr>
+        <td>{{ customer.nombres }}</td>
+        <td>{{ customer.apellido }}</td>
+        <td>{{ customer.tipoDocumento }}</td>
+        <td>{{ customer.numeroDocumento }}</td>
+        <td>{{ customer.nacionalidad }}</td>
+        <td>{{ customer.direccion }}</td>
+        <td>{{ customer.telefono }}</td>
+        <td>{{ customer.email }}</td>
+        <td>{{ customer.fechaNacimiento }}</td>
+        <td><a href="/customers/view/{{customer.id}}">Editar</a></td>
+        <td><a href="/customers/delete/{{customer.id}}" class="delete-customer">Borrar</a></td>
+      </tr>
+    {% endfor %}
+
+  </table>
+
+{% endblock %}

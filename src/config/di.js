@@ -4,21 +4,29 @@ const {
 const { Sequelize } = require('sequelize');
 const session = require('express-session');
 const { CarController, CarService, CarRepository } = require('../module/car/module');
+const { CustomerController, CustomerService, CustomerRepository } = require('../module/customer/module');
 const CarModel = require('../module/car/model/carModel');
+const CustomerModel = require('../module/customer/model/customerModel');
 
 function configureMainDatabaseAdapter() {
   return new Sequelize({
     dialect: 'sqlite',
     storage: process.env.DB_PATH,
-    logging: console.log,
   });
 }
 
 /**
  * @param {DIContainer} container
  */
-function configureDatabaseModelInstance(container) {
-  return CarModel.setup(container.get('MainDatabaseAdapter'));
+function configureCarModel(container) {
+  return CarModel.setup(container.get('Sequelize'));
+}
+
+/**
+ * @param {DIContainer} container
+ */
+function configureCustomerModel(container) {
+  return CustomerModel.setup(container.get('Sequelize'));
 }
 
 function configureSession() {
@@ -38,9 +46,8 @@ function configureSession() {
  */
 function addCommonDefinitions(container) {
   container.addDefinitions({
-    MainDatabaseAdapter: factory(configureMainDatabaseAdapter),
+    Sequelize: factory(configureMainDatabaseAdapter),
     Session: factory(configureSession),
-    CarModelInstance: factory(configureDatabaseModelInstance),
   });
 }
 
@@ -52,6 +59,19 @@ function addCarModuleDefinitions(container) {
     CarController: object(CarController).construct(get('CarService')),
     CarService: object(CarService).construct(get('CarRepository')),
     CarRepository: object(CarRepository).construct(get('CarModelInstance')),
+    CarModelInstance: factory(configureCarModel),
+  });
+}
+
+/**
+ * @param {DIContainer} container
+ */
+function addCustomerModuleDefinitions(container) {
+  container.addDefinitions({
+    CustomerController: object(CustomerController).construct(get('CustomerService')),
+    CustomerService: object(CustomerService).construct(get('CustomerRepository')),
+    CustomerRepository: object(CustomerRepository).construct(get('CustomerModelInstance')),
+    CustomerModelInstance: factory(configureCustomerModel),
   });
 }
 
@@ -59,5 +79,6 @@ module.exports = function configureDI() {
   const container = new DIContainer();
   addCommonDefinitions(container);
   addCarModuleDefinitions(container);
+  addCustomerModuleDefinitions(container);
   return container;
 };
