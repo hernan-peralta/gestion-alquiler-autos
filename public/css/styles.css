@@ -1,7 +1,6 @@
 header {
   height: 100px;
   background-color: blue;
-
 }
 
 .title-header{
@@ -12,10 +11,7 @@ header {
   justify-content: center;
   align-items: center;
   height: 100%;
-}
-
-h1{
-  color: red;
+  width: 100%;
 }
 
 #nuevo-vehiculo, #nuevo-cliente{
@@ -44,4 +40,51 @@ input[type=text]{
 
 .exito{
   border-color: green;
+}
+
+input[type=submit], button {
+  background-color: #035de4;
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+}
+
+button:hover, input[type=submit]:hover{
+  background-color: #4c76ff;
+}
+ 
+.menu{
+  display: table;   /* Allow the centering to work */
+	margin: 0 auto;
+}
+
+ul{
+  list-style-type: none;
+  overflow: hidden;
+  padding-left: 0px;
+}
+
+ul li{
+  float: left;
+  background-color: #035de4;
+}
+
+ul li:hover{
+  background-color: #4c76ff;
+}
+
+ul li a{
+  display: inline-block;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: white;
+}
+
+.block-body{
+  text-align: center;
+  display: grid;
 }

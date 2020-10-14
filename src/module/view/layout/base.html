@@ -14,15 +14,16 @@
     <div class="title-header">Car Rental</div>
   </header>
 
-  <a href="/cars">
-    <button>Autos</button>
-  </a>
+  <div class="menu">
+    <ul>
+      <li><a href="/cars">Autos</a></li>
+      <li><a href="/customers">Clientes</a></li>
+    </ul>
+  </div>
 
-  <a href="/customers">
-    <button>Clientes</button>
-  </a>
-
-  {% block body %}{% endblock %}
+  <div class="block-body">
+    {% block body %}{% endblock %}
+  </div>
   
   <script src="/js/main.js"></script>
 </body>
