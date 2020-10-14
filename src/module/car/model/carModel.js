@@ -39,6 +39,9 @@ module.exports = class CarModel extends Model {
         transmision: {
           type: DataTypes.STRING,
         },
+        precio: {
+          type: DataTypes.NUMBER,
+        },
       },
       {
         sequelize: sequelizeInstance,

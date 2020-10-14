@@ -32,6 +32,7 @@
       <th>Aire acondicionado</th>
       <th>Pasajeros</th>
       <th>Transmisión</th>
+      <th>Precio</th>
     </tr>
 
     {% for car in data.cars %}
@@ -44,6 +45,7 @@
         <td>{{ car.aireAcondicionado }}</td>
         <td>{{ car.pasajeros }}</td>
         <td>{{ car.transmision }}</td>
+        <td>{{ car.precio }}</td>
         <td><a href="/cars/view/{{car.id}}">Editar</a></td>
         <td><a href="/cars/delete/{{car.id}}" class="delete-car">Borrar</a></td>
       </tr>

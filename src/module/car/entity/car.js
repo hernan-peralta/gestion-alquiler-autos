@@ -9,6 +9,7 @@ module.exports = class Car {
     aireAcondicionado,
     pasajeros,
     transmision,
+    precio,
   }) {
     this.id = id;
     this.marca = marca;
@@ -19,5 +20,6 @@ module.exports = class Car {
     this.aireAcondicionado = aireAcondicionado;
     this.pasajeros = pasajeros;
     this.transmision = transmision;
+    this.precio = precio;
   }
 };

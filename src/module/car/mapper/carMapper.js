@@ -14,6 +14,7 @@ function fromDataToEntity({
   'aire-acondicionado': aireAcondicionado,
   pasajeros,
   transmision,
+  precio,
 }) {
   return new Car({
     id,
@@ -25,6 +26,7 @@ function fromDataToEntity({
     aireAcondicionado,
     pasajeros,
     transmision,
+    precio,
   });
 }
 
@@ -42,6 +44,7 @@ function fromDbToEntity({
   aireAcondicionado,
   pasajeros,
   transmision,
+  precio,
 }) {
   return new Car({
     id,
@@ -53,6 +56,7 @@ function fromDbToEntity({
     aireAcondicionado,
     pasajeros,
     transmision,
+    precio,
   });
 }
 
