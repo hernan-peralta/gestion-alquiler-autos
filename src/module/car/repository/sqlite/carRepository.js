@@ -25,16 +25,14 @@ module.exports = class CarRepository extends AbstractCarRepository {
 
   /**
    * @param {import('../../entity/car')} car
-   * @returns {Boolean} //true si borró algo, false si no borró nada
+   * @returns {Boolean}
    */
   async delete(car) {
     if (!car || !car.id) {
       throw new CarIdNotDefinedError('El ID del auto no está definido');
     }
 
-    const auto = await this.carModel.findByPk(car.id);
-    auto.destroy();
-    return true;
+    return Boolean(await this.carModel.destroy({ where: { id: car.id } }));
   }
 
   /**

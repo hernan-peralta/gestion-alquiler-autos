@@ -32,9 +32,7 @@ module.exports = class CustomerRepository extends AbstractCustomerRepository {
       throw new CustomerIdNotDefinedError('El ID del cliente no está definido');
     }
 
-    const cliente = await this.customerModel.findByPk(customer.id);
-    cliente.destroy();
-    return true;
+    return Boolean(this.customerModel.destroy({ where: { id: customer.id } }));
   }
 
   /**
