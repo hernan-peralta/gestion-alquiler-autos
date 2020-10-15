@@ -46,8 +46,8 @@ module.exports = class CarModel extends Model {
       {
         sequelize: sequelizeInstance,
         modelName: 'Auto',
-        createdAt: 'created_at',
-        updatedAt: 'updated_at',
+        createdAt: 'creado_en',
+        updatedAt: 'actualizado_en',
       },
     );
     return CarModel;

@@ -45,9 +45,9 @@ module.exports = class CustomerModel extends Model {
       },
       {
         sequelize: sequelizeInstance,
-        modelName: 'Customer',
-        createdAt: 'created_at',
-        updatedAt: 'updated_at',
+        modelName: 'Cliente',
+        createdAt: 'creado_en',
+        updatedAt: 'actualizado_en',
       },
     );
     return CustomerModel;
