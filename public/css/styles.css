@@ -58,7 +58,7 @@ button:hover, input[type=submit]:hover{
 }
  
 .menu{
-  display: table;   /* Allow the centering to work */
+  display: table;
 	margin: 0 auto;
 }
 
