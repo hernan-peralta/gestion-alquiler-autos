@@ -42,7 +42,7 @@ module.exports = class CarRepository extends AbstractCarRepository {
   async getById(id) {
     const car = await this.carModel.findByPk(id);
 
-    if (car === undefined) {
+    if (!car) {
       throw new CarNotFoundError(`No se encontró el auto con id ${id}`);
     }
 
