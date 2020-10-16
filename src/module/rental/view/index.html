@@ -1,0 +1,54 @@
+{% extends 'view/layout/base.html' %}
+
+{% block body %}
+
+  <h2>Lista de alquileres</h2>
+
+  {% for error in errors %}
+    <div class="notificacion error">
+      {{error}}
+    </div>
+  {% endfor %}
+
+  {% for message in messages %}
+    <div class="notificacion exito">
+      {{message}}
+    </div>
+  {% endfor %}
+
+  <div id="div-boton">
+    <a href="/rentals/new">
+      <button id=''>Agregar alquiler</button>
+    </a>
+  </div>
+
+  <table>
+    <tr>
+      <th>Auto</th>
+      <th>Cliente</th>
+      <th>Precio unitario</th>
+      <th>Fecha desde</th>
+      <th>Fecha hasta</th>
+      <th>Precio total</th>
+      <th>Medio de pago</th>
+      <th>Pago</th>
+    </tr>
+
+    {% for rental in data.rentals %}
+      <tr>
+        <td>{{ rental.auto }}</td>
+        <td>{{ rental.cliente }}</td>
+        <td>{{ rental.precioUnitario }}</td>
+        <td>{{ rental.fechaDesde }}</td>
+        <td>{{ rental.fechaHasta }}</td>
+        <td>{{ rental.precioTotal }}</td>
+        <td>{{ rental.medioPago }}</td>
+        <td>{{ rental.pago }}</td>
+        <td><a href="/rentals/view/{{rental.id}}">Editar</a></td>
+        <td><a href="/rentals/delete/{{rental.id}}" class="delete-rental">Borrar</a></td>
+      </tr>
+    {% endfor %}
+
+  </table>
+
+{% endblock %}

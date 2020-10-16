@@ -1,0 +1,53 @@
+{% extends 'view/layout/base.html' %}
+
+{% block body %}
+{% set rental = data.rental %}
+
+<div id="div-boton">
+  <a href="/rentals">
+  <button id='inicio'>Volver atrás</button>
+  </a>
+</div>
+
+<h2>Nuevo alquiler</h2>
+
+<div id="nuevo-alquiler">
+  <form action="/rentals/save" method="POST">
+    <input type="hidden" name="id" value="{{rental.id}}" readonly />
+
+    <label for="id-auto">Auto</label>
+    <input type="text" name="auto" id="id-auto" placeholder="Auto" value="{{rental.auto}}">
+
+    <label for="id-cliente">Cliente</label>
+    <input type="text" name="cliente" id="id-cliente" placeholder="Cliente" value="{{rental.cliente}}">
+
+    <label for="id-precio-unitario">Precio unitario</label>
+    <input type="text" name="precio-unitario" id="id-precio-unitario" placeholder="Precio unitario" value="{{rental.precioUnitario}}">
+
+    <label for="id-fecha-desde">Fecha desde</label>
+    <input type="date" name="fecha-desde" id="id-fecha-desde" placeholder="Fecha desde" value="{{rental.fecha-desde}}">
+
+    <label for="id-fecha-hasta">Fecha hasta</label>
+    <input type="date" name="fecha-hasta" id="id-fecha-hasta" placeholder="Fecha hasta" value="{{rental.fecha-hasta}}">
+
+    <label for="id-precio-total">Precio total</label>
+    <input type="text" name="precio-total" id="id-precio-total" placeholder="Precio total" value="{{rental.precioTotal}}">
+
+    <label for="id-medio-pago">Medio de pago</label>
+    <input type="text" name="medio-pago" id="id-medio-pago" placeholder="Medio de pago" value="{{rental.medioPago}}">
+
+    <label for="radio-buttons">Pago</label>
+    <div id="radio-buttons">
+      <label for="id-pago-si">Si</label>
+      <input type="radio" name="pago" id="id-pago-si" value="TRUE" {% if rental.pago === "TRUE" %}checked{% endif %}>
+      <label for="id-pago-no">No</label>
+      <input type="radio" name="pago" id="id-pago-no" value="FALSE" {% if rental.pago === "FALSE" %}checked{% endif %}>
+    </div>
+    
+    <input type="submit" value="Agregar alquiler">
+
+  </form>
+
+</div>
+
+{% endblock %}

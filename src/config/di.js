@@ -5,8 +5,10 @@ const { Sequelize } = require('sequelize');
 const session = require('express-session');
 const { CarController, CarService, CarRepository } = require('../module/car/module');
 const { CustomerController, CustomerService, CustomerRepository } = require('../module/customer/module');
+const { RentalController, RentalService, RentalRepository } = require('../module/rental/module');
 const CarModel = require('../module/car/model/carModel');
 const CustomerModel = require('../module/customer/model/customerModel');
+const RentalModel = require('../module/rental/model/rentalModel');
 
 function configureMainDatabaseAdapter() {
   return new Sequelize({
@@ -27,6 +29,15 @@ function configureCarModel(container) {
  */
 function configureCustomerModel(container) {
   return CustomerModel.setup(container.get('Sequelize'));
+}
+
+/**
+ * @param {DIContainer} container
+ */
+function configureRentalModel(container) {
+  RentalModel.setup(container.get('Sequelize'));
+  RentalModel.setupAssociations(container.get('CarModelInstance'), container.get('CustomerModelInstance'));
+  return RentalModel;
 }
 
 function configureSession() {
@@ -75,10 +86,23 @@ function addCustomerModuleDefinitions(container) {
   });
 }
 
+/**
+ * @param {DIContainer} container
+ */
+function addRentalModuleDefinitions(container) {
+  container.addDefinitions({
+    RentalController: object(RentalController).construct(get('RentalService')),
+    RentalService: object(RentalService).construct(get('RentalRepository')),
+    RentalRepository: object(RentalRepository).construct(get('RentalModelInstance'), get('CarModelInstance'), get('CustomerModelInstance')),
+    RentalModelInstance: factory(configureRentalModel),
+  });
+}
+
 module.exports = function configureDI() {
   const container = new DIContainer();
   addCommonDefinitions(container);
   addCarModuleDefinitions(container);
   addCustomerModuleDefinitions(container);
+  addRentalModuleDefinitions(container);
   return container;
 };

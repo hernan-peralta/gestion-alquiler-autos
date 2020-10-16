@@ -14,7 +14,7 @@ header {
   width: 100%;
 }
 
-#nuevo-vehiculo, #nuevo-cliente{
+#nuevo-vehiculo, #nuevo-cliente, #nuevo-alquiler{
   width: 50%;
   margin-left: auto;
   margin-right: auto;
