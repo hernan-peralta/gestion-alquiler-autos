@@ -30,10 +30,6 @@ function fromDataToEntity({
   });
 }
 
-/**
- * @param {Object} formData
- * @returns Customer
- */
 function fromDbToEntity(model) {
   return new Customer(model.toJSON());
 }

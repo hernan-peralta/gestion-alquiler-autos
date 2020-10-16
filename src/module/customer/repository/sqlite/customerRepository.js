@@ -18,7 +18,7 @@ module.exports = class CustomerRepository extends AbstractCustomerRepository {
    */
   async save(customer) {
     const buildOptions = { isNewRecord: !customer.id };
-    let cliente = await this.customerModel.build(customer, buildOptions);
+    let cliente = this.customerModel.build(customer, buildOptions);
     cliente = await cliente.save();
     return fromDbToEntity(cliente);
   }

@@ -1,1 +1,1 @@
-module.exports = class MethodNotImplementedError extends Error{};
+module.exports = class MethodNotImplementedError extends Error {};
