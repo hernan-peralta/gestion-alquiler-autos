@@ -7,6 +7,19 @@ const CarModel = require('../../../model/carModel');
 
 let mockDb;
 
+function createCarMock() {
+  return new Car({
+    marca: 'undefined',
+    modelo: 'undefined',
+    año: 'undefined',
+    kms: 'undefined',
+    color: 'undefined',
+    aireAcondicionado: 'undefined',
+    pasajeros: 'undefined',
+    transmision: 'undefined',
+  });
+}
+
 beforeEach(async () => {
   const sequelizeInstance = new Sequelize({ dialect: 'sqlite', storage: ':memory:' });
   mockDb = CarModel.setup(sequelizeInstance);
@@ -15,16 +28,7 @@ beforeEach(async () => {
 
 test('Guardar un auto nuevo genera un id', async () => {
   const carRepository = new CarRepository(mockDb);
-  const carMock = new Car({
-    marca: 'undefined',
-    modelo: 'undefined',
-    año: 'undefined',
-    kms: 'undefined',
-    color: 'undefined',
-    aireAcondicionado: 'undefined',
-    pasajeros: 'undefined',
-    transmision: 'undefined',
-  });
+  const carMock = createCarMock();
 
   const savedCar = await carRepository.save(carMock);
   expect(savedCar.id).toEqual(1);
@@ -32,16 +36,7 @@ test('Guardar un auto nuevo genera un id', async () => {
 
 test('Guardar un auto existente actualiza los valores', async () => {
   const carRepository = new CarRepository(mockDb);
-  const carMock = new Car({
-    marca: 'undefined',
-    modelo: 'undefined',
-    año: 'undefined',
-    kms: 'undefined',
-    color: 'undefined',
-    aireAcondicionado: 'undefined',
-    pasajeros: 'undefined',
-    transmision: 'undefined',
-  });
+  const carMock = createCarMock();
 
   let savedCar = await carRepository.save(carMock);
   expect(savedCar.id).toEqual(1);
@@ -89,16 +84,7 @@ test('Buscar un auto con id que no existe da error', () => {
 
 test('Buscar un auto por id devuelve el auto adecuado', () => {
   const carRepository = new CarRepository(mockDb);
-  const carMock = new Car({
-    marca: 'undefined',
-    modelo: 'undefined',
-    año: 'undefined',
-    kms: 'undefined',
-    color: 'undefined',
-    aireAcondicionado: 'undefined',
-    pasajeros: 'undefined',
-    transmision: 'undefined',
-  });
+  const carMock = createCarMock();
 
   const savedCar = carRepository.save(carMock);
   expect(carRepository.getById(1)).toEqual(savedCar);
@@ -106,16 +92,8 @@ test('Buscar un auto por id devuelve el auto adecuado', () => {
 
 test('Eliminar auto elimina un auto existente', async () => {
   const carRepository = new CarRepository(mockDb);
-  const carMock = new Car({
-    marca: 'undefined',
-    modelo: 'undefined',
-    año: 'undefined',
-    kms: 'undefined',
-    color: 'undefined',
-    aireAcondicionado: 'undefined',
-    pasajeros: 'undefined',
-    transmision: 'undefined',
-  });
+  const carMock = createCarMock();
+
   const savedcar = await carRepository.save(carMock);
 
   expect(await carRepository.delete(savedcar)).toEqual(true);
@@ -129,27 +107,9 @@ test('Eliminar auto sin un id da error', async () => {
 
 test('Obtener todos los autos devuelve un array de entidad Auto', async () => {
   const carRepository = new CarRepository(mockDb);
-  const carMock1 = new Car({
-    marca: 'undefined',
-    modelo: 'undefined',
-    año: 'undefined',
-    kms: 'undefined',
-    color: 'undefined',
-    aireAcondicionado: 'undefined',
-    pasajeros: 'undefined',
-    transmision: 'undefined',
-  });
 
-  const carMock2 = new Car({
-    marca: 'undefined',
-    modelo: 'undefined',
-    año: 'undefined',
-    kms: 'undefined',
-    color: 'undefined',
-    aireAcondicionado: 'undefined',
-    pasajeros: 'undefined',
-    transmision: 'undefined',
-  });
+  const carMock1 = createCarMock();
+  const carMock2 = createCarMock();
 
   await carRepository.save(carMock1);
   await carRepository.save(carMock2);

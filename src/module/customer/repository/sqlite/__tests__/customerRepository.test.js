@@ -7,6 +7,20 @@ const CustomerModel = require('../../../model/customerModel');
 
 let mockDb;
 
+function createCustomerMock() {
+  return new Customer({
+    nombres: 'undefined',
+    apellido: 'undefined',
+    tipoDocumento: 'undefined',
+    numeroDocumento: 'undefined',
+    nacionalidad: 'undefined',
+    direccion: 'undefined',
+    telefono: 'undefined',
+    email: 'undefined',
+    fechaNacimiento: 'undefined',
+  });
+}
+
 beforeEach(async () => {
   const sequelizeInstance = new Sequelize({ dialect: 'sqlite', storage: ':memory:' });
   mockDb = CustomerModel.setup(sequelizeInstance);
@@ -15,17 +29,7 @@ beforeEach(async () => {
 
 test('Guardar un cliente nuevo genera un id', async () => {
   const customerRepository = new CustomerRepository(mockDb);
-  const customerMock = new Customer({
-    nombres: 'undefined',
-    apellido: 'undefined',
-    tipoDocumento: 'undefined',
-    numeroDocumento: 'undefined',
-    nacionalidad: 'undefined',
-    direccion: 'undefined',
-    telefono: 'undefined',
-    email: 'undefined',
-    fechaNacimiento: 'undefined',
-  });
+  const customerMock = createCustomerMock();
 
   const savedCustomer = await customerRepository.save(customerMock);
   expect(savedCustomer.id).toEqual(1);
@@ -33,17 +37,7 @@ test('Guardar un cliente nuevo genera un id', async () => {
 
 test('Guardar un cliente existente actualiza los valores', async () => {
   const customerRepository = new CustomerRepository(mockDb);
-  const customerMock = new Customer({
-    nombres: 'undefined',
-    apellido: 'undefined',
-    tipoDocumento: 'undefined',
-    numeroDocumento: 'undefined',
-    nacionalidad: 'undefined',
-    direccion: 'undefined',
-    telefono: 'undefined',
-    email: 'undefined',
-    fechaNacimiento: 'undefined',
-  });
+  const customerMock = createCustomerMock();
 
   let savedCustomer = await customerRepository.save(customerMock);
   expect(savedCustomer.id).toEqual(1);
@@ -92,17 +86,7 @@ test('Buscar un cliente con id que no existe da error', () => {
 
 test('Buscar un cliente por id devuelve el cliente adecuado', () => {
   const customerRepository = new CustomerRepository(mockDb);
-  const customerMock = new Customer({
-    nombres: 'undefined',
-    apellido: 'undefined',
-    tipoDocumento: 'undefined',
-    numeroDocumento: 'undefined',
-    nacionalidad: 'undefined',
-    direccion: 'undefined',
-    telefono: 'undefined',
-    email: 'undefined',
-    fechaNacimiento: 'undefined',
-  });
+  const customerMock = createCustomerMock();
 
   const savedCustomer = customerRepository.save(customerMock);
   expect(customerRepository.getById(1)).toEqual(savedCustomer);
@@ -110,17 +94,7 @@ test('Buscar un cliente por id devuelve el cliente adecuado', () => {
 
 test('Eliminar cliente elimina un cliente existente', async () => {
   const customerRepository = new CustomerRepository(mockDb);
-  const customerMock = new Customer({
-    nombres: 'undefined',
-    apellido: 'undefined',
-    tipoDocumento: 'undefined',
-    numeroDocumento: 'undefined',
-    nacionalidad: 'undefined',
-    direccion: 'undefined',
-    telefono: 'undefined',
-    email: 'undefined',
-    fechaNacimiento: 'undefined',
-  });
+  const customerMock = createCustomerMock();
   const savedcustomer = await customerRepository.save(customerMock);
 
   expect(await customerRepository.delete(savedcustomer)).toEqual(true);
@@ -134,30 +108,10 @@ test('Eliminar cliente sin un id da error', async () => {
 
 test('Obtener todos los clientes devuelve un array de entidad Customer', async () => {
   const customerRepository = new CustomerRepository(mockDb);
-  const customerMock1 = new Customer({
-    nombres: 'undefined',
-    apellido: 'undefined',
-    tipoDocumento: 'undefined',
-    numeroDocumento: 'undefined',
-    nacionalidad: 'undefined',
-    direccion: 'undefined',
-    telefono: 'undefined',
-    email: 'undefined',
-    fechaNacimiento: 'undefined',
-  });
-  await customerRepository.save(customerMock1);
+  const customerMock1 = createCustomerMock();
+  const customerMock2 = createCustomerMock();
 
-  const customerMock2 = new Customer({
-    nombres: 'undefined',
-    apellido: 'undefined',
-    tipoDocumento: 'undefined',
-    numeroDocumento: 'undefined',
-    nacionalidad: 'undefined',
-    direccion: 'undefined',
-    telefono: 'undefined',
-    email: 'undefined',
-    fechaNacimiento: 'undefined',
-  });
+  await customerRepository.save(customerMock1);
   await customerRepository.save(customerMock2);
 
   const arrayCustomers = await customerRepository.getAll();
