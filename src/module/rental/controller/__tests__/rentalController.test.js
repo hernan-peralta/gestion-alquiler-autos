@@ -11,6 +11,27 @@ const serviceMock = {
 
 const controller = new RentalController(serviceMock);
 
+test('configureRoutes configura las rutas', () => {
+  const app = {
+    get: jest.fn(),
+    post: jest.fn(),
+  };
+
+  controller.configureRoutes(app);
+
+  expect(app.get).toHaveBeenCalledWith('/rentals', expect.any(Function));
+  expect(app.get).toHaveBeenCalledWith('/rentals/new', expect.any(Function));
+  expect(app.get).toHaveBeenCalledWith('/rentals/view/:id', expect.any(Function));
+  expect(app.post).toHaveBeenCalledWith('/rentals/save', expect.any(Function));
+  expect(app.get).toHaveBeenCalledWith('/rentals/delete/:id', expect.any(Function));
+
+  expect(app.get.mock.calls[0][1].name).toBe('bound index');
+  expect(app.get.mock.calls[1][1].name).toBe('bound new');
+  expect(app.post.mock.calls[0][1].name).toBe('bound save');
+  expect(app.get.mock.calls[2][1].name).toBe('bound view');
+  expect(app.get.mock.calls[3][1].name).toBe('bound delete');
+});
+
 test('Index renderea index.html', async () => {
   const resRenderMock = jest.fn();
 
@@ -32,14 +53,14 @@ test('Save edita un auto cuando hay un id presente', async () => {
   const redirectMock = jest.fn();
   const rentalMock = new Rental({
     id: 1,
-    marca: undefined,
-    modelo: undefined,
-    año: undefined,
-    kms: undefined,
-    color: undefined,
-    aireAcondicionado: undefined,
-    pasajeros: undefined,
-    transmision: undefined,
+    auto: undefined,
+    cliente: undefined,
+    precioUnitario: undefined,
+    fechaDesde: undefined,
+    fechaHasta: undefined,
+    precioTotal: undefined,
+    medioPago: undefined,
+    pago: undefined,
   });
 
   const reqMock = { body: rentalMock, session: {} };
@@ -57,17 +78,28 @@ test('Save edita un auto cuando hay un id presente', async () => {
 
 test('Save crea un auto cuando no hay id', async () => {
   serviceMock.save.mockReset();
+  serviceMock.save.mockImplementationOnce(() => new Rental({
+    id: 1,
+    auto: undefined,
+    cliente: undefined,
+    precioUnitario: undefined,
+    fechaDesde: undefined,
+    fechaHasta: undefined,
+    precioTotal: undefined,
+    medioPago: undefined,
+    pago: undefined,
+  }));
+
   const redirectMock = jest.fn();
   const rentalMock = new Rental({
-    id: 1,
-    marca: undefined,
-    modelo: undefined,
-    año: undefined,
-    kms: undefined,
-    color: undefined,
-    aireAcondicionado: undefined,
-    pasajeros: undefined,
-    transmision: undefined,
+    auto: undefined,
+    cliente: undefined,
+    precioUnitario: undefined,
+    fechaDesde: undefined,
+    fechaHasta: undefined,
+    precioTotal: undefined,
+    medioPago: undefined,
+    pago: undefined,
   });
 
   const reqMock = { body: rentalMock, session: {} };

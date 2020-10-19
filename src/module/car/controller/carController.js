@@ -78,7 +78,7 @@ module.exports = class CarController extends AbstractController {
       } else {
         req.session.messages = [`Se agregó el vehículo con id ${savedCar.id} exitosamente`];
       }
-      res.redirect('/');
+      res.redirect('/cars');
     } catch (e) {
       req.session.errors = [e.message, e.stack];
       res.redirect('/cars');

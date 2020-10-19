@@ -11,6 +11,26 @@ const serviceMock = {
 
 const controller = new CustomerController(serviceMock);
 
+test('configureRoutes configura las rutas', () => {
+  const app = {
+    get: jest.fn(),
+    post: jest.fn(),
+  };
+
+  controller.configureRoutes(app);
+  expect(app.get).toHaveBeenCalledWith('/customers', expect.any(Function));
+  expect(app.get).toHaveBeenCalledWith('/customers/new', expect.any(Function));
+  expect(app.get).toHaveBeenCalledWith('/customers/view/:id', expect.any(Function));
+  expect(app.post).toHaveBeenCalledWith('/customers/save', expect.any(Function));
+  expect(app.get).toHaveBeenCalledWith('/customers/delete/:id', expect.any(Function));
+
+  expect(app.get.mock.calls[0][1].name).toBe('bound index');
+  expect(app.get.mock.calls[1][1].name).toBe('bound new');
+  expect(app.post.mock.calls[0][1].name).toBe('bound save');
+  expect(app.get.mock.calls[2][1].name).toBe('bound view');
+  expect(app.get.mock.calls[3][1].name).toBe('bound delete');
+});
+
 test('Index renderea index.html', async () => {
   const resRenderMock = jest.fn();
 
@@ -57,9 +77,20 @@ test('Save edita un auto cuando hay un id presente', async () => {
 
 test('Save crea un auto cuando no hay id', async () => {
   serviceMock.save.mockReset();
+  serviceMock.save.mockImplementationOnce(() => new Customer({
+    id: 1,
+    marca: undefined,
+    modelo: undefined,
+    año: undefined,
+    kms: undefined,
+    color: undefined,
+    aireAcondicionado: undefined,
+    pasajeros: undefined,
+    transmision: undefined,
+  }));
+
   const redirectMock = jest.fn();
   const customerMock = new Customer({
-    id: 1,
     marca: undefined,
     modelo: undefined,
     año: undefined,
