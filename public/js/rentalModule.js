@@ -8,6 +8,16 @@ for (let i = 1; i < alquileres.length; i++) {
   };
 }
 
+document.querySelectorAll('.delete').forEach((elem) => elem.addEventListener('click', (e) => {
+  if (confirm('¿Está seguro de realizar esta acción? El resultado será irreversible')) {
+    return true;
+  }
+
+  e.preventDefault();
+  return false;
+}));
+
+
 function mostrarAlquileresPagos() {
   document.querySelector('tbody.pagos').classList.remove('oculto');
   document.querySelector('tbody.impagos').classList.add('oculto');
