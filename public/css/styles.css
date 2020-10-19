@@ -88,3 +88,21 @@ ul li a{
   text-align: center;
   display: grid;
 }
+
+.filtrar-pagos{
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+#pagos{
+  background-color: green;
+}
+
+#impagos{
+  background-color: red;
+}
+
+.oculto{
+  display: none;
+}

@@ -16,13 +16,23 @@
     </div>
   {% endfor %}
 
+  <div class="filtrar-pagos">
+    <div id="div-boton">
+        <button id='impagos'>Impagos</button>
+    </div>
+  
+    <div id="div-boton">
+        <button id='pagos'>Pagos</button>
+    </div>
+  </div>
+
   <div id="div-boton">
     <a href="/rentals/new">
       <button id=''>Agregar alquiler</button>
     </a>
   </div>
 
-  <table>
+  <table id="tabla-alquileres">
     <tr>
       <th>Auto</th>
       <th>Cliente</th>
@@ -34,21 +44,26 @@
       <th>Pago</th>
     </tr>
 
-    {% for rental in data.rentals %}
-      <tr>
-        <td>{{ rental.auto }}</td>
-        <td>{{ rental.cliente }}</td>
-        <td>{{ rental.precioUnitario }}</td>
-        <td>{{ rental.fechaDesde }}</td>
-        <td>{{ rental.fechaHasta }}</td>
-        <td>{{ rental.precioTotal }}</td>
-        <td>{{ rental.medioPago }}</td>
-        <td>{{ rental.pago }}</td>
-        <td><a href="/rentals/view/{{rental.id}}">Editar</a></td>
-        <td><a href="/rentals/delete/{{rental.id}}" class="delete delete-rental">Borrar</a></td>
-      </tr>
-    {% endfor %}
+    <tbody class="impagos">
+      {% for rental in data.rentals %}
+        {% if rental.pago == "FALSE" %}
+          {% include './table.html' %}
+        {% endif %}
+      {% endfor %}
+    </tbody>
+
+    <tbody class="pagos">
+      {% for rental in data.rentals %}
+        {% if rental.pago == "TRUE" %}
+          {% include './table.html' %}
+        {% endif %}
+      {% endfor %}
+    </tbody>
 
   </table>
 
+{% endblock %}
+
+{% block script %}
+  <script src="/js/rentalModule.js"></script>
 {% endblock %}
