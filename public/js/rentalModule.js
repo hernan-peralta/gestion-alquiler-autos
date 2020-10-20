@@ -28,7 +28,13 @@ function mostrarAlquileresImpagos() {
   document.querySelector('tbody.pagos').classList.add('oculto');
 }
 
+function mostrarTodos() {
+  document.querySelector('tbody.impagos').classList.remove('oculto');
+  document.querySelector('tbody.pagos').classList.remove('oculto');
+}
+
 document.querySelector('#impagos').onclick = () => mostrarAlquileresImpagos();
 document.querySelector('#pagos').onclick = () => mostrarAlquileresPagos();
+document.querySelector('#todos').onclick = () => mostrarTodos();
 
 mostrarAlquileresImpagos();
