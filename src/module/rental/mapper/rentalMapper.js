@@ -17,8 +17,8 @@ function fromDataToEntity({
 }) {
   return new Rental({
     id,
-    auto,
-    cliente,
+    fkAuto: Number(auto),
+    fkCliente: Number(cliente),
     precioUnitario,
     fechaDesde,
     fechaHasta,

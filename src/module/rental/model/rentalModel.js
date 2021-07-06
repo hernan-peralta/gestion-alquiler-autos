@@ -15,7 +15,7 @@ module.exports = class RentalModel extends Model {
           autoIncrement: true,
           unique: true,
         },
-        auto: {
+        fkAuto: {
           type: DataTypes.INTEGER,
           allowNull: false,
           references: {
@@ -25,7 +25,7 @@ module.exports = class RentalModel extends Model {
             key: 'id',
           },
         },
-        cliente: {
+        fkCliente: {
           type: DataTypes.INTEGER,
           allowNull: false,
           references: {

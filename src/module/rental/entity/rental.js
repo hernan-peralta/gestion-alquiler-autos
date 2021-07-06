@@ -1,8 +1,8 @@
 module.exports = class Rental {
   constructor({
     id,
-    auto,
-    cliente,
+    fkAuto,
+    fkCliente,
     precioUnitario,
     fechaDesde,
     fechaHasta,
@@ -11,8 +11,8 @@ module.exports = class Rental {
     pago,
   }) {
     this.id = id;
-    this.auto = auto;
-    this.cliente = cliente;
+    this.fkAuto = fkAuto;
+    this.fkCliente = fkCliente;
     this.precioUnitario = precioUnitario;
     this.fechaDesde = fechaDesde;
     this.fechaHasta = fechaHasta;
