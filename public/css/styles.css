@@ -99,10 +99,31 @@ ul li a{
   background-color: green;
 }
 
+#pagos:hover{
+  background-color: rgb(0, 190, 0);
+}
+
 #impagos{
   background-color: red;
 }
 
+#impagos:hover{
+  background-color: rgb(255, 66, 66);
+}
+
 .oculto{
   display: none;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr {
+  border-top: solid thin;
+  border-bottom: solid thin;
+}
+
+tr:nth-child(1) {
+  border-top: none;
 }
