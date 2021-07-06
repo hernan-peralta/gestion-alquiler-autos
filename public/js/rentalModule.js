@@ -5,7 +5,7 @@ for (let i = 1; i < alquileres.length; i++) {
     alquileres[i].cells[7].style.backgroundColor = 'green';
   } else {
     alquileres[i].cells[7].style.backgroundColor = 'red';
-  };
+  }
 }
 
 document.querySelectorAll('.delete').forEach((elem) => elem.addEventListener('click', (e) => {
@@ -16,7 +16,6 @@ document.querySelectorAll('.delete').forEach((elem) => elem.addEventListener('cl
   e.preventDefault();
   return false;
 }));
-
 
 function mostrarAlquileresPagos() {
   document.querySelector('tbody.pagos').classList.remove('oculto');
