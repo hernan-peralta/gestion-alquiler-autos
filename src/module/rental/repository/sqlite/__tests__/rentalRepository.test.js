@@ -155,6 +155,7 @@ test('Obtener todos los alquileres devuelve un array de entidad Rental', async (
   await rentalRepository.save(rentalMock1);
   await rentalRepository.save(rentalMock2);
 
+  // https://medium.com/@andrei.pfeiffer/jest-matching-objects-in-array-50fe2f4d6b98
   expect(await rentalRepository.getAll()).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
